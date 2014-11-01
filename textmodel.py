@@ -102,7 +102,7 @@ class TextModel(object):
 			return (line.find(" N ")!=-1 or line.find(" V ")!=-1 or line.find(" ADJ ")!=-1\
 					or line.find(" ADV ")!=-1) and not line.find(" abb. ")!=-1
 
-		output = subprocess.check_output([r"./words", wd]) # Call Whitaker's Words, this works only on Unix-like OS
+		output = subprocess.check_output([r"./words/words", wd]) # Call Whitaker's Words, this works only on Unix-like OS
 		out_lines = output.split('\n')
 		best_level = 0 # 0=not found, 1=qualified, 2=unqualified
 		for line in out_lines:

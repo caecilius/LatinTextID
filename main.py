@@ -32,9 +32,9 @@ def generate(filename):
 	global global_model, root
 	model_name = filename.split("/")[-1].split("\\")[-1]
 	model = TextModel(model_name)
-	model.addTextFromFile(filename + ".txt")
+	model.addTextFromFile("texts/" + filename + ".txt")
 	print model
-	model.saveModelToFiles(filename + ".model")
+	model.saveModelToFiles("models/" + filename + ".model")
 	tkMessageBox.showinfo("Success", "Success! Model saved to " + filename + ".model.")
 	current_model_name.set("Current model: " + model_name)
 	if global_model == None:
@@ -43,7 +43,8 @@ def generate(filename):
 
 def btngenerate():
 	"""Queries user for file name and calls generate."""
-	filename = tkFileDialog.askopenfilename(title="File name", filetypes=[("Text file (*.txt)", "txt")], initialdir=".")
+	filename = tkFileDialog.askopenfilename(title="File name", filetypes=[("Text file (*.txt)",\
+            "txt")], initialdir="./texts")
 	filename = "".join(filename.split(".")[:-1])
 	generate(filename)
 
@@ -52,7 +53,7 @@ def read(filename):
 	global global_model
 	model_name = filename.split("/")[-1].split("\\")[-1]
 	model = TextModel(model_name)
-	model.readModelFromFiles(filename + ".model")
+	model.readModelFromFiles("models/" + filename + ".model")
 	print model
 	tkMessageBox.showinfo("Success", "Success! Model " + filename + ".model has been loaded.")
 	current_model_name.set("Current model: " + model_name)
@@ -62,7 +63,9 @@ def read(filename):
 
 def btnread():
 	"""Queries user for file name and calls read."""
-	filename = tkFileDialog.askopenfilename(title="File name to load", filetypes=[("Model file (*.model)", "model")], initialdir=".")
+        filename = tkFileDialog.askopenfilename(title="File name to load",\
+                filetypes=[("Model file (*.model)", "model")],\
+                initialdir="./models")
 	filename = "".join(filename.split(".")[:-1])
 	read(filename)
 
@@ -87,7 +90,7 @@ def readcomp(filename):
 	global compare_model
 	model_name = filename.split("/")[-1].split("\\")[-1]
 	model = TextModel(model_name)
-	model.readModelFromFiles(filename + ".model")
+	model.readModelFromFiles("models/" + filename + ".model")
 	tkMessageBox.showinfo("Success", "Success! Model " + filename + ".model has been loaded.")
 	print model
 	compare_model = model
@@ -96,7 +99,8 @@ def readcomp(filename):
 
 def btnreadcomp():
 	"""Queries user for file name and calls readcomp."""
-	filename = tkFileDialog.askopenfilename(title="File name to load", filetypes=[("Model file (*.model)", "model")], initialdir=".")
+	filename = tkFileDialog.askopenfilename(title="File name to load", filetypes=\
+                [("Model file (*.model)", "model")], initialdir="./models")
 	filename = "".join(filename.split(".")[:-1])
 	readcomp(filename)
 
